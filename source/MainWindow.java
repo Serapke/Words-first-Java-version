@@ -1,9 +1,7 @@
 package zodziai;
 
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,9 +10,6 @@ import java.io.FileReader;
 import javax.swing.border.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/*
- * Pradinis programos langas
- */
 public class MainWindow {
 
 	private JFrame frame;
@@ -22,7 +17,7 @@ public class MainWindow {
 	private JMenuBar menuBar;
 	private JPanel menuP;
 	private JLabel copyrightL;
-	
+
 	public JMenuItem homeMenuItem;
 	public JMenuItem newMenuItem;
 	public JMenuItem saveMenuItem;
@@ -30,20 +25,20 @@ public class MainWindow {
 	public JMenuItem exitMenuItem;
 	public JMenuItem homePageMenuItem;
 	public JMenuItem statisticsMenuItem;
-	
+
 	private LessonEnglish lessonE;
 	private LessonLithuanian lessonL;
 	private LessonCreator creator;
 	private Test test;
 	private OptionsPanel options;
-	
+
 	private boolean translateLithuanian;
 	private boolean translateEnglish;
 	private boolean showSentence;
 	private boolean saveStats;
 	private boolean alwaysOnTop;
 	private String nickName;
-	
+
 	private boolean optionsChecked = false;
 
 	public static void main(String[] args) {
@@ -53,85 +48,55 @@ public class MainWindow {
 	}
 
 	public void go() {
-		/*
-		 * Pagrindinio lango parametrai
-		 */
-		frame = new JFrame("Þodþiai");
+		frame = new JFrame("Words");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(SystemColor.window);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		/*
-		 * Programos pavadinimas
-		 */
-		mainL = new JLabel("MANO ÞODÞIAI");
+
+		mainL = new JLabel("LearnWords");
 		mainL.setHorizontalAlignment(SwingConstants.CENTER);
 		mainL.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		
-		/*
-		 * Pagrindinë panelë (ji turëtø keistis)
-		 */
+
 		menuP = new JPanel();
 		menuP.setBackground(new Color(255, 255, 153));
 		menuP.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		menuP.setLayout(null);
-		
-		/*
-		 * 'Pamokos' mygtukas
-		 */
-		JButton playLessonButton = new JButton("Pamokos");
+
+		JButton playLessonButton = new JButton("Lessons");
 		playLessonButton.setBackground(new Color(51, 102, 255));
 		playLessonButton.setForeground(new Color(255, 255, 255));
 		playLessonButton.setBounds(29, 43, 146, 33);
 		playLessonButton.setIcon(new ImageIcon("C:\\Users\\Mantas\\Desktop\\SkyDrive\\IT\\Java\\\u017Dod\u017Eiai\\bin\\images\\iconmonstr-book-17-icon-24.png"));
 		playLessonButton.addActionListener(new PlayLessonListener());
-		
-		/*
-		 * 'Testas' mygtukas
-		 */
-		JButton playTestButton = new JButton("Testas");
+
+		JButton playTestButton = new JButton("Test");
 		playTestButton.setBackground(new Color(51, 102, 255));
 		playTestButton.setForeground(new Color(255, 255, 255));
 		playTestButton.setBounds(29, 87, 146, 33);
 		playTestButton.setIcon(new ImageIcon("C:\\Users\\Mantas\\Desktop\\SkyDrive\\IT\\Java\\\u017Dod\u017Eiai\\bin\\images\\iconmonstr-checkbox-12-icon-24.png"));
 		playTestButton.addActionListener(new PlayTestListener());
-		
-		/*
-		 * 'Kurti pamokà' mygtukas
-		 */
-		JButton createLessonButton = new JButton("Kurti pamok\u0105");
+
+		JButton createLessonButton = new JButton("Create New Lesson");
 		createLessonButton.setBackground(new Color(51, 102, 255));
 		createLessonButton.setForeground(new Color(255, 255, 255));
 		createLessonButton.setBounds(29, 131, 146, 33);
 		createLessonButton.setIcon(new ImageIcon("C:\\Users\\Mantas\\Desktop\\SkyDrive\\IT\\Java\\\u017Dod\u017Eiai\\bin\\images\\iconmonstr-plus-5-icon-24.png"));
 		createLessonButton.addActionListener(new CreateLessonListener());
-		
-		/*
-		 * 'Parametrai' mygtukas
-		 */
-		JButton openParametersButton = new JButton("Parametrai");
+
+		JButton openParametersButton = new JButton("Options");
 		openParametersButton.setBackground(new Color(51, 102, 255));
 		openParametersButton.setForeground(new Color(255, 255, 255));
 		openParametersButton.setBounds(29, 175, 144, 33);
 		openParametersButton.setIcon(new ImageIcon("C:\\Users\\Mantas\\Desktop\\SkyDrive\\IT\\Java\\\u017Dod\u017Eiai\\bin\\images\\iconmonstr-gear-10-icon-24.png"));
 		openParametersButton.addActionListener(new OpenParameterListener());
-		
-		/*
-		 * Mano logotipas
-		 */
+
 		JLabel myLogo = new JLabel("");
 		myLogo.setIcon(new ImageIcon("C:\\Users\\Mantas\\Desktop\\SkyDrive\\IT\\Java\\\u017Dod\u017Eiai\\bin\\images\\logo.jpg"));
 		myLogo.setBounds(204, 71, 208, 104);
-		
-		/*
-		 * 'All rights reserved' uþraðas
-		 */
-		copyrightL = new JLabel("\u00A9 2014 MS Visos teis\u0117s saugomos");
+
+		copyrightL = new JLabel("\u00A9 2014 MS All rights reserved.");
 		copyrightL.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		/*
-		 * Menu
-		 */
+
 		menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
 			homeMenuItem = new JMenuItem("Home");
@@ -158,8 +123,7 @@ public class MainWindow {
 			homePageMenuItem.setBackground(new Color(255, 255, 255));
 			statisticsMenuItem = new JMenuItem("Statistics");
 			statisticsMenuItem.setBackground(new Color(255, 255, 255));
-		
-		
+
 		menuBar.add(fileMenu);
 			fileMenu.add(homeMenuItem);
 			fileMenu.add(newMenuItem);
@@ -169,7 +133,7 @@ public class MainWindow {
 		menuBar.add(onlineMenu);
 			onlineMenu.add(homePageMenuItem);
 			onlineMenu.add(statisticsMenuItem);
-		
+
 		frame.setJMenuBar(menuBar);
 		frame.getContentPane().add(mainL, BorderLayout.NORTH);
 		frame.getContentPane().add(menuP, BorderLayout.CENTER);
@@ -179,26 +143,23 @@ public class MainWindow {
 			menuP.add(openParametersButton);
 			menuP.add(myLogo);
 		frame.getContentPane().add(copyrightL, BorderLayout.SOUTH);
-		
-		/*
-		 * Pagrindinio lango parametrai
-		 */
+
 		frame.setResizable(false);
 		frame.setSize(450, 340);
 		frame.setVisible(true);
 	}
-	
+
 	public class PlayLessonListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			frame.getContentPane().remove(mainL);
 			frame.getContentPane().remove(menuP);
 			frame.getContentPane().remove(copyrightL);
-			
+
 			if (optionsChecked) {
 				translateLithuanian = options.getTranslateLithuanian();
 				translateEnglish = options.getTranslateEnglish();
 			}
-			
+
 			homeMenuItem.setEnabled(true);
 			optionsMenuItem.setEnabled(true);
 			if (translateEnglish) {
@@ -213,7 +174,7 @@ public class MainWindow {
 			frame.getContentPane().repaint();
 		}
 	}
-	
+
 	public class PlayTestListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			frame.getContentPane().remove(mainL);
@@ -226,7 +187,7 @@ public class MainWindow {
 			frame.getContentPane().repaint();
 		}
 	}
-	
+
 	public class CreateLessonListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			frame.getContentPane().remove(mainL);
@@ -241,7 +202,7 @@ public class MainWindow {
 			frame.getContentPane().repaint();
 		}
 	}
-	
+
 	public class OpenParameterListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			frame.getContentPane().remove(mainL);
@@ -259,10 +220,7 @@ public class MainWindow {
 			frame.setAlwaysOnTop(alwaysOnTop);
 		}
 	}
-	
-	/*
-	 * Gráþimas á pagrindiná menu (File -> Home)
-	 */
+
 	public class HomeMenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			frame.getContentPane().removeAll();
@@ -277,24 +235,18 @@ public class MainWindow {
 			optionsMenuItem.setEnabled(false);
 		}
 	}
-	
-	/*
-	 * Naujos pamokos kûrimas (File -> New)
-	 */
+
 	public class NewMenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			creator.wordList.clear();
 			creator.clearWord();
 		}
 	}
-	
-	/*
-	 * Pamokos iðsaugojimas árenginyje (File -> Save)
-	 */
+
 	public class SaveMenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			System.out.println("SAVE");
-			JFileChooser fileSave = new JFileChooser("C:\\Users\\Mantas\\Desktop\\SkyDrive\\IT\\Java\\Þodþiai\\lessons");
+			JFileChooser fileSave = new JFileChooser("C:\\Users\\Mantas\\Desktop\\SkyDrive\\IT\\Java\\ï¿½odï¿½iai\\lessons");
 			FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files (*.txt)", "txt");
 			fileSave.setFileFilter(filter);
 			fileSave.showSaveDialog(new JFrame());
@@ -302,11 +254,7 @@ public class MainWindow {
 			creator.saveFile(file);
 		}
 	}
-	
-	/*
-	 * Programos parametrai (File -> Exit)
-	 * Naujam lange
-	 */
+
 	public class OptionsMenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			JFrame newFrame = new JFrame();
@@ -322,16 +270,13 @@ public class MainWindow {
 			frame.setAlwaysOnTop(alwaysOnTop);
 		}
 	}
-	
-	/*
-	 * Programos iðjungimas (File -> Exit)
-	 */
+
 	public class ExitMenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			System.exit(0);
 		}
 	}
-	
+
 	public void loadOptions() {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("options.txt"));
@@ -343,7 +288,7 @@ public class MainWindow {
 				nickName = reader.readLine();
 			reader.close();
 		} catch(Exception ex) {
-			System.out.println("Error. Couldn't read the card file");
+			System.out.println("Error. Couldn't read Options file!");
 			ex.printStackTrace();
 		}
 	}
